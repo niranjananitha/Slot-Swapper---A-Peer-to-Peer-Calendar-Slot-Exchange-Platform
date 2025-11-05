@@ -17,8 +17,10 @@ const Dashboard = () => {
     try {
       const response = await events.getMyEvents();
       setUserEvents(response.data);
+      setError(''); // Clear any previous errors
     } catch (err) {
-      setError('Failed to fetch events');
+      console.error('Fetch events error:', err);
+      setError('Failed to fetch events: ' + (err.response?.data?.error || err.message));
     }
   };
 

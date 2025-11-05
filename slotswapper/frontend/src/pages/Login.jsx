@@ -19,7 +19,7 @@ const Login = () => {
     try {
       const response = await auth.login({ email, password });
       login(response.data.user, response.data.token);
-      navigate('/dashboard');
+      window.location.href = '/dashboard';
     } catch (err) {
       setError(err.response?.data?.error || 'Invalid email or password');
     } finally {

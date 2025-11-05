@@ -1,11 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { events } from '../api';
+import { useAuth } from '../context/AuthContext';
 
 const NotificationSystem = () => {
   const [notifications, setNotifications] = useState([]);
+  const { user } = useAuth();
+
+  if (!user) return null;
 
   useEffect(() => {
     const checkUpcomingEvents = async () => {
+      if (!user) return;
+      
       try {
         const response = await events.getMyEvents();
         const now = new Date();
@@ -32,7 +38,7 @@ const NotificationSystem = () => {
     const interval = setInterval(checkUpcomingEvents, 60000); // Check every minute
 
     return () => clearInterval(interval);
-  }, []);
+  }, [user]);
 
   const dismissNotification = (id) => {
     setNotifications(prev => prev.filter(n => n.id !== id));

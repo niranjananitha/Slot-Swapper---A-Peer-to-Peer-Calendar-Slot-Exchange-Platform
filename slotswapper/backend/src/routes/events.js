@@ -1,5 +1,6 @@
 const express = require('express');
 const { Event, EVENT_STATUS } = require('../models/Event');
+const User = require('../models/User');
 const auth = require('../middleware/auth');
 
 const router = express.Router();
@@ -7,16 +8,27 @@ const router = express.Router();
 // Get family events
 router.get('/my-events', auth, async (req, res) => {
   try {
-    // Get all users in the same family
-    const familyUsers = await User.find({ familyId: req.user.familyId });
-    const familyUserIds = familyUsers.map(user => user._id);
+    let events;
     
-    // Get all events from family members
-    const events = await Event.find({ owner: { $in: familyUserIds } })
-      .populate('owner', 'name')
-      .sort({ startTime: 1 });
+    if (req.user.familyId) {
+      // Get all users in the same family
+      const familyUsers = await User.find({ familyId: req.user.familyId });
+      const familyUserIds = familyUsers.map(user => user._id);
+      
+      // Get all events from family members
+      events = await Event.find({ owner: { $in: familyUserIds } })
+        .populate('owner', 'name')
+        .sort({ startTime: 1 });
+    } else {
+      // Fallback to user's own events if no familyId
+      events = await Event.find({ owner: req.user._id })
+        .populate('owner', 'name')
+        .sort({ startTime: 1 });
+    }
+    
     res.json(events);
   } catch (error) {
+    console.error('Events fetch error:', error);
     res.status(500).json({ error: error.message });
   }
 });

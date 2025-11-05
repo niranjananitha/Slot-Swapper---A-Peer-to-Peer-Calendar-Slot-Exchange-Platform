@@ -36,7 +36,7 @@ const Signup = () => {
     try {
       const { name, email, password } = formData;
       await auth.signup({ name, email, password });
-      navigate('/login');
+      window.location.href = '/login';
     } catch (err) {
       setError(err.response?.data?.error || 'Failed to sign up');
     } finally {

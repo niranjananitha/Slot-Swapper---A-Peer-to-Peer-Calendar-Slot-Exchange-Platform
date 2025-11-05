@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const { Event, EVENT_STATUS } = require('../models/Event');
 const { SwapRequest, SWAP_STATUS } = require('../models/SwapRequest');
+const User = require('../models/User');
 const auth = require('../middleware/auth');
 
 const router = express.Router();
@@ -9,14 +10,25 @@ const router = express.Router();
 // Get all swappable slots (excluding user's own)
 router.get('/swappable-slots', auth, async (req, res) => {
   try {
-    const slots = await Event.find({
+    let query = {
       owner: { $ne: req.user._id },
       status: EVENT_STATUS.SWAPPABLE
-    }).populate('owner', 'name email')
+    };
+    
+    // If user has familyId, exclude family members' slots
+    if (req.user.familyId) {
+      const familyUsers = await User.find({ familyId: req.user.familyId });
+      const familyUserIds = familyUsers.map(user => user._id);
+      query.owner = { $nin: familyUserIds };
+    }
+    
+    const slots = await Event.find(query)
+      .populate('owner', 'name email')
       .sort({ startTime: 1 });
     
     res.json(slots);
   } catch (error) {
+    console.error('Swappable slots error:', error);
     res.status(500).json({ error: error.message });
   }
 });
@@ -30,8 +42,18 @@ router.post('/swap-request', auth, async (req, res) => {
     const { mySlotId, theirSlotId } = req.body;
 
     // Verify both slots exist and are SWAPPABLE
+    let mySlotQuery = { _id: mySlotId };
+    
+    if (req.user.familyId) {
+      const familyUsers = await User.find({ familyId: req.user.familyId });
+      const familyUserIds = familyUsers.map(user => user._id);
+      mySlotQuery.owner = { $in: familyUserIds };
+    } else {
+      mySlotQuery.owner = req.user._id;
+    }
+    
     const [mySlot, theirSlot] = await Promise.all([
-      Event.findOne({ _id: mySlotId, owner: req.user._id }).session(session),
+      Event.findOne(mySlotQuery).session(session),
       Event.findOne({ _id: theirSlotId }).session(session)
     ]);
 

@@ -18,6 +18,15 @@ router.post('/signup', async (req, res) => {
       return res.status(400).json({ error: 'Password must be at least 6 characters' });
     }
     
+    // Check if user with same email and name already exists
+    const existingUser = await User.findOne({ 
+      email: email.toLowerCase(), 
+      name: name 
+    });
+    if (existingUser) {
+      return res.status(400).json({ error: 'User with this name and email already exists' });
+    }
+
     // Generate familyId based on email (same email = same family)
     const familyId = email.toLowerCase().replace(/[^a-z0-9]/g, '');
 

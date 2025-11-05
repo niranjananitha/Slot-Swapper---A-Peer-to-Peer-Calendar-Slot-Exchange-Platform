@@ -21,13 +21,13 @@ export const AuthProvider = ({ children }) => {
     localStorage.setItem('user', JSON.stringify(userData));
     localStorage.setItem('token', token);
     setUser(userData);
-    return Promise.resolve();
   };
 
   const logout = () => {
-    setUser(null);
     localStorage.removeItem('user');
     localStorage.removeItem('token');
+    setUser(null);
+    window.location.href = '/login';
   };
 
   const value = {

@@ -39,5 +39,8 @@ userSchema.methods.comparePassword = async function(password) {
   return await bcrypt.compare(password, this.password);
 };
 
+// Compound index to prevent exact duplicates (same email + name)
+userSchema.index({ email: 1, name: 1 }, { unique: true });
+
 const User = mongoose.model('User', userSchema);
 module.exports = User;

@@ -15,8 +15,10 @@ const Marketplace = () => {
     try {
       const response = await swaps.getSwappableSlots();
       setSwappableSlots(response.data);
+      setError(''); // Clear any previous errors
     } catch (err) {
-      setError('Failed to fetch swappable slots');
+      console.error('Fetch swappable slots error:', err);
+      setError('Failed to fetch swappable slots: ' + (err.response?.data?.error || err.message));
     }
   };
 
@@ -27,7 +29,8 @@ const Marketplace = () => {
         response.data.filter((event) => event.status === 'SWAPPABLE')
       );
     } catch (err) {
-      setError('Failed to fetch your swappable slots');
+      console.error('Fetch my swappable slots error:', err);
+      setError('Failed to fetch your swappable slots: ' + (err.response?.data?.error || err.message));
     } finally {
       setLoading(false);
     }
