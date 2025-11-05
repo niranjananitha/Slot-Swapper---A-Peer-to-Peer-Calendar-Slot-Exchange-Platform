@@ -1,0 +1,548 @@
+/* Minimalist Black & White Theme */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #ffffff;
+  min-height: 100vh;
+  color: #000000;
+}
+
+/* Container base */
+.glass-container {
+  background: #ffffff;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.glass-container:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Card variations */
+.glass-card {
+  background: #ffffff;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+/* Navigation */
+.glass-nav {
+  background: #ffffff;
+  border: none;
+  border-bottom: 1px solid #e5e5e5;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.glass-nav:hover {
+  background: #f9fafb;
+}
+
+/* Button styles */
+.glass-button {
+  background: #ffffff;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  color: #374151;
+  font-weight: 500;
+  padding: 12px 24px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  text-transform: none;
+}
+
+.glass-button:hover {
+  background: #000000;
+  color: #ffffff;
+  border-color: #000000;
+}
+
+.glass-button-primary {
+  background: #000000;
+  border: 1px solid #000000;
+  color: #ffffff;
+}
+
+.glass-button-primary:hover {
+  background: #1f2937;
+  border-color: #1f2937;
+}
+
+.glass-button.active {
+  background: #000000;
+  color: #ffffff;
+  border-color: #000000;
+}
+
+/* Input styles */
+.glass-input {
+  background: #ffffff;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  color: #111827;
+  padding: 12px 16px;
+  transition: all 0.3s ease;
+}
+
+.glass-input:focus {
+  outline: none;
+  border-color: #000000;
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
+}
+
+.glass-input::placeholder {
+  color: #9ca3af;
+}
+
+/* Status chips */
+.status-chip {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.status-busy {
+  background: #f3f4f6;
+  color: #374151;
+  border: 1px solid #d1d5db;
+}
+
+.status-swappable {
+  background: #000000;
+  color: #ffffff;
+  border: 1px solid #000000;
+}
+
+.status-pending {
+  background: #f9fafb;
+  color: #6b7280;
+  border: 1px solid #e5e7eb;
+}
+
+/* List items */
+.glass-list-item {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  margin-bottom: 12px;
+  padding: 16px;
+  transition: all 0.3s ease;
+}
+
+.glass-list-item:hover {
+  background: #f9fafb;
+  border-color: #d1d5db;
+}
+
+/* Modal styles */
+.glass-modal {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+
+/* Text colors */
+.text-primary {
+  color: #111827;
+}
+
+.text-secondary {
+  color: #6b7280;
+}
+
+.text-muted {
+  color: #9ca3af;
+}
+
+/* Animations */
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-slide-up {
+  animation: slideInUp 0.6s ease-out;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s ease-out;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+/* Calendar Styles */
+.calendar-container {
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.month-year {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.nav-btn {
+  padding: 8px 12px;
+  font-size: 18px;
+  min-width: 40px;
+}
+
+.calendar-days-header {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1px;
+  margin-bottom: 8px;
+}
+
+.day-header {
+  padding: 12px 8px;
+  text-align: center;
+  font-weight: 600;
+  color: #6b7280;
+  font-size: 14px;
+  background: #f9fafb;
+  border-radius: 4px;
+}
+
+.calendar-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.calendar-row {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1px;
+}
+
+.calendar-day {
+  min-height: 100px;
+  padding: 8px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.calendar-day:hover {
+  background: #f9fafb;
+  border-color: #d1d5db;
+}
+
+.calendar-day.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.calendar-day.disabled:hover {
+  background: #ffffff;
+  border-color: #e5e7eb;
+}
+
+.calendar-day.selected {
+  background: #f3f4f6;
+  border-color: #9ca3af;
+}
+
+.calendar-day.today {
+  background: #000000;
+  border-color: #000000;
+}
+
+.calendar-day.today .day-number {
+  color: #ffffff;
+}
+
+.day-number {
+  display: block;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 4px;
+  font-size: 14px;
+}
+
+.day-events {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.event-dot {
+  padding: 2px 6px;
+  border-radius: 12px;
+  font-size: 10px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.event-dot:hover {
+  transform: scale(1.05);
+}
+
+.event-dot.busy {
+  background: #f3f4f6;
+  color: #374151;
+  border: 1px solid #d1d5db;
+}
+
+.event-dot.swappable {
+  background: #000000;
+  color: #ffffff;
+  border: 1px solid #000000;
+}
+
+.event-dot.swap_pending {
+  background: #f9fafb;
+  color: #6b7280;
+  border: 1px solid #e5e7eb;
+}
+
+.more-events {
+  font-size: 10px;
+  color: #9ca3af;
+  text-align: center;
+  padding: 2px;
+}
+
+/* Event Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.event-modal {
+  width: 100%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 24px 16px 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.close-btn {
+  padding: 8px 12px;
+  font-size: 16px;
+  min-width: auto;
+}
+
+.modal-body {
+  padding: 24px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  font-size: 16px;
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* DateTime Input Styling */
+.time-picker {
+  color-scheme: light;
+  background: #ffffff !important;
+  border: 1px solid #d1d5db !important;
+}
+
+.time-picker::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  padding: 4px;
+}
+
+.time-picker::-webkit-datetime-edit {
+  color: #111827;
+}
+
+.time-picker::-webkit-datetime-edit-fields-wrapper {
+  color: #111827;
+}
+
+.time-picker::-webkit-datetime-edit-text {
+  color: #6b7280;
+}
+
+.time-picker::-webkit-datetime-edit-month-field,
+.time-picker::-webkit-datetime-edit-day-field,
+.time-picker::-webkit-datetime-edit-year-field,
+.time-picker::-webkit-datetime-edit-hour-field,
+.time-picker::-webkit-datetime-edit-minute-field {
+  color: #111827;
+  background: transparent;
+}
+
+.time-picker:focus::-webkit-datetime-edit-month-field:focus,
+.time-picker:focus::-webkit-datetime-edit-day-field:focus,
+.time-picker:focus::-webkit-datetime-edit-year-field:focus,
+.time-picker:focus::-webkit-datetime-edit-hour-field:focus,
+.time-picker:focus::-webkit-datetime-edit-minute-field:focus {
+  background: #f3f4f6;
+  border-radius: 2px;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modal-actions button {
+  padding: 12px 24px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* View Toggle */
+.view-toggle {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.view-toggle button {
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.view-toggle button.active {
+  background: rgba(120, 119, 198, 0.4);
+  border-color: rgba(120, 119, 198, 0.6);
+}
+
+/* Responsive Calendar */
+@media (max-width: 768px) {
+  .calendar-day {
+    min-height: 80px;
+    padding: 4px;
+  }
+  
+  .day-number {
+    font-size: 12px;
+  }
+  
+  .event-dot {
+    font-size: 9px;
+    padding: 1px 4px;
+  }
+  
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+  
+  .modal-actions {
+    flex-direction: column;
+  }
+}
